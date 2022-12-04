@@ -2,7 +2,8 @@ import express from "express"
 import cors from "cors"
 import dotenv from "dotenv"
 import connectDatabase from "./config/mongodb.js"
-import ImportData from "./routes/dataimport.routes.js";
+import ImportData from "./dataimport.routes.js";
+import productRoute from "./routes/product.routes.js";
 
 dotenv.config();
 connectDatabase();
@@ -10,7 +11,8 @@ const app = express();
 app.use(cors());
 
 
-app.use("/api/import", ImportData)
+app.use("/api/import", ImportData);
+app.use('/api/products', productRoute)
 //load all products
 app.get("/api/products",(req,res) =>{
     res.json(products)
