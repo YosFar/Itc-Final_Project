@@ -1,6 +1,7 @@
 import express from "express";
 import asyncHandler from "express-async-handler";
 import User from '../schemaModels/userSchema.js'
+import generateToken from "../utils/generateToken.js";
 
 const userRouter = express.Router()
 
@@ -17,7 +18,7 @@ userRouter.post(
             name: user.name,
             email: user.email,
             isAdmin: user.isAdmin,
-            token: user.token,
+            token: generateToken(user._id),
             createdAt: user.createdAt,
             })
         } else{
