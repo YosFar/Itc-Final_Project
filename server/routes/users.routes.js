@@ -1,5 +1,6 @@
 import express from "express";
 import asyncHandler from "express-async-handler";
+import protect from "../Auth.js";
 import User from '../schemaModels/userSchema.js'
 import generateToken from "../utils/generateToken.js";
 
@@ -25,6 +26,15 @@ userRouter.post(
             res.status(401)
             throw new Error("Invalid Email or Password")
         }
+    })
+)
+
+// PROFILE
+userRouter.post(
+    '/profile',
+    protect,
+    asyncHandler( async (req, res) => {
+        res.send('User Profile')
     })
 )
 
